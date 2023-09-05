@@ -35,6 +35,14 @@ class FlyNoWay(FlyBehavior):
     def fly(self):
         print("I can't fly!")
 
+
+class FlyRocketPowered(FlyBehavior):
+    """
+    Implements flying with a rocket.
+    """
+    def fly(self):
+        print("I'm flying with a rocket!!")
+
 class Quack(QuackBehavior):
     """
     Implements quacking.
