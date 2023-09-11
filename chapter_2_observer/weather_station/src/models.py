@@ -12,6 +12,30 @@ class WeatherData(Subject):
         self._humidity: float = None
         self._pressure: float = None
 
+    @property
+    def temp(self):
+        return self._temp
+    
+    @temp.setter
+    def temp(self, value):
+        self._temp = value
+
+    @property
+    def pressure(self):
+        return self._pressure
+    
+    @pressure.setter
+    def pressure(self, value):
+        self._pressure = value
+
+    @property
+    def humidity(self):
+        return self._humidity
+    
+    @humidity.setter
+    def humidity(self, value):
+        self._humidity = value
+
     def register_observer(self, observer: Observer):
         self._observers.append(observer)
 
@@ -20,7 +44,7 @@ class WeatherData(Subject):
 
     def notify_observers(self):
         for observer in self._observers:
-            observer.update(self._temp, self._humidity, self._pressure)
+            observer.update()
 
     def measurements_changed(self):
         """
@@ -45,11 +69,12 @@ class ConditionsDisplay(Observer, Display):
         self._temp: float = None
         self._humidity: float = None
         self._weather_data: WeatherData = weather_data
+        
         weather_data.register_observer(self)
 
-    def update(self, temp: float, humidity: float, pressure: float):
-        self._temp = temp
-        self._humidity = humidity
+    def update(self):
+        self._temp = self._weather_data.temp
+        self._humidity = self._weather_data.humidity
         self.display()
 
     def display(self):
@@ -63,10 +88,11 @@ class StatsDisplay(Observer, Display):
     def __init__(self, weather_data: WeatherData) -> None:
         self._temps = []
         self._weather_data = weather_data
+        
         weather_data.register_observer(self)
 
-    def update(self, temp: float, humidity: float, pressure: float):
-        self._temps.append(temp)
+    def update(self):
+        self._temps.append(self._weather_data.temp)
         self.display()
 
     def display(self):

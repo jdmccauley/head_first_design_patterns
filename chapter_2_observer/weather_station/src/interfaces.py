@@ -5,7 +5,7 @@ class Observer(ABC):
     Interface for an Observer
     """
     @abstractmethod
-    def update(self, temp: float, humidity: float, pressure: float):
+    def update(self):
         pass
 
 class Subject(ABC):
