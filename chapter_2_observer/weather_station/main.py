@@ -6,13 +6,14 @@ def main():
     weather_data = WeatherData()
     conditions_display = ConditionsDisplay(weather_data)
     stats_display = StatsDisplay(weather_data)
+    pressure_display = PressureDisplay(weather_data)
 
     weather_data.set_measurements(
         60.0, 50.0, 1.0
     )
 
     weather_data.set_measurements(
-        99.5, 99.0, 1.0
+        99.5, 99.0, 2.0
     )
 
 

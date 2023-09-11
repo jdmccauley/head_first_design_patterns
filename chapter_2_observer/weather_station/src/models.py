@@ -102,3 +102,32 @@ class StatsDisplay(Observer, Display):
 
         print(f"Avg/Max/Min temperature = {avg}/{maximum}/{minimum}")
 
+
+
+class PressureDisplay(Observer, Display):
+    """
+    A display showing the pressure change.
+    """
+    def __init__(self, weather_data: WeatherData) -> None:
+        self._weather_data = weather_data
+        self._last_pressure: float = 1.0
+        self._current_pressure: float = weather_data.pressure
+
+        weather_data.register_observer(self)
+
+
+    def update(self):
+        self._last_pressure = self._current_pressure
+        self._current_pressure = self._weather_data.pressure
+        self.display()
+
+    def display(self):
+        if self._last_pressure:
+            diff = self._current_pressure - self._last_pressure
+        else:
+            diff = 0.0
+
+        print(
+            f"Pressure for today: {self._current_pressure}, which",
+            f" is {diff} different than yesterday!"
+        )
