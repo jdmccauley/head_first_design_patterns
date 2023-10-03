@@ -1,5 +1,7 @@
 from abc import ABC
 
+from src.ingredient_factory import IngredientFactory
+
 class Pizza(ABC):
     def __init__(self) -> None:
         super().__init__()
@@ -28,20 +30,21 @@ class Pizza(ABC):
 
 
 class NYStyleCheesePizza(Pizza):
-    def __init__(self) -> None:
+    def __init__(self, ingredient_factory: IngredientFactory) -> None:
         super().__init__()
         self.name = "NY Style Sauce and Cheese Pizza"
-        self.dough = "Thin Crust Dough"
-        self.sauce = "Marinera Sauce"
-        self.toppings.append("Grated Reggiano Cheese")
-
+        self.dough = ingredient_factory.create_dough()
+        self.sauce = ingredient_factory.create_sauce()
+        self.sauce = ingredient_factory.create_cheese()
+        self.toppings = []
 
 class ChicagoStyleCheesePizza(Pizza):
-    def __init__(self) -> None:
+    def __init__(self, ingredient_factory: IngredientFactory) -> None:
         super().__init__()
         self.name = "Chicago Style Deep Dish Cheese Pizza"
-        self.dough = "Extra Thick Crust Dough"
-        self.sauce = "Plum Tomato Sauce"
-        self.toppings.append("Shredded Mozzarella Cheese")
+        self.dough = ingredient_factory.create_dough()
+        self.sauce = ingredient_factory.create_sauce()
+        self.sauce = ingredient_factory.create_cheese()
+        self.toppings = []
 
     

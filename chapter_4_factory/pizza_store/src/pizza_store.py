@@ -1,8 +1,15 @@
 from abc import ABC, abstractmethod
 
 from src.pizza import *
+from src.ingredient_factory import *
+
+# In this file, we'll define classes that use Factory Methods.
 
 class PizzaStore(ABC):
+    """
+    This is the abstract Creator Class. Subclasses will implement it's
+    factory method.
+    """
     def __init__(self) -> None:
         super().__init__()
 
@@ -23,14 +30,18 @@ class PizzaStore(ABC):
 
         return pizza
     
+
+# Look how simple these classes are: they're only the factory method!
+    
 class NYPizzaStore(PizzaStore):
     def __init__(self) -> None:
         super().__init__()
+        self.ingredient_factory = NYIngredientFactory()
 
     def createPizza(self, kind: str):
         match kind:
             case "cheese":
-                return NYStyleCheesePizza()
+                return NYStyleCheesePizza(self.ingredient_factory)
             case _:
                 print("Invalid Pizza type.")
                 return None
@@ -38,11 +49,12 @@ class NYPizzaStore(PizzaStore):
 class ChicagoPizzaStore(PizzaStore):
     def __init__(self) -> None:
         super().__init__()
+        self.ingredient_factory = ChicagoIngredientFactory()
     
     def createPizza(self, kind: str):
         match kind:
             case "cheese":
-                return ChicagoStyleCheesePizza()
+                return ChicagoStyleCheesePizza(self.ingredient_factory)
             case _:
                 print("Invalid Pizza type.")
                 return None
