@@ -10,9 +10,6 @@ class PizzaStore(ABC):
     This is the abstract Creator Class. Subclasses will implement it's
     factory method.
     """
-    def __init__(self) -> None:
-        super().__init__()
-
     @abstractmethod
     def createPizza(self, kind: str):
         """
@@ -35,7 +32,6 @@ class PizzaStore(ABC):
     
 class NYPizzaStore(PizzaStore):
     def __init__(self) -> None:
-        super().__init__()
         self.ingredient_factory = NYIngredientFactory()
 
     def createPizza(self, kind: str):
@@ -48,7 +44,6 @@ class NYPizzaStore(PizzaStore):
             
 class ChicagoPizzaStore(PizzaStore):
     def __init__(self) -> None:
-        super().__init__()
         self.ingredient_factory = ChicagoIngredientFactory()
     
     def createPizza(self, kind: str):
