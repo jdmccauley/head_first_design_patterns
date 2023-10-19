@@ -17,6 +17,12 @@ class Iterator(ABC):
         pass
 
 
+class MenuItem:
+    def __init__(self, name: str, price: float) -> None:
+        self.name = name
+        self.price = price
+
+
 class DinerMenu(Iterator):
     def __init__(self) -> None:
         """
@@ -26,13 +32,8 @@ class DinerMenu(Iterator):
         self.length = 0
         self.i = None
 
-        self.add_item("Vegetarian BLT")
-        self.add_item("BLT")
-        self.add_item("Soup of the day")
-        self.add_item("Hotdog")
 
-
-    def add_item(self, item):
+    def add_item(self, item: MenuItem):
         self.menu.append(item)
         self.length += 1
     
@@ -58,14 +59,9 @@ class PancakeHouseMenu(Iterator):
         self.menu = ()
         self.length = 0
         self.i = None
-
-        self.add_item("Pancake Breakfast")
-        self.add_item("Blueberry Pancakes")
-        self.add_item("Waffles")
-
     
-    def add_item(self, value):
-        self.menu += tuple([value])
+    def add_item(self, item: MenuItem):
+        self.menu += tuple([item])
         self.length += 1
 
     
@@ -93,12 +89,8 @@ class CafeMenu(Iterator):
         self.length = 0
         self.i = None
 
-        self.add_item("Coffee")
-        self.add_item("Muffin")
-        self.add_item("Bagel")
-
-    def add_item(self, value):
-        self.menu[self.length] = value
+    def add_item(self, item: MenuItem):
+        self.menu[self.length] = item
         self.length += 1
 
     def __iter__(self):

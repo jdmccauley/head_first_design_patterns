@@ -15,14 +15,16 @@ class Waitress:
         diner_it = iter(self.diner_menu)
         cafe_it = iter(self.cafe_menu)
 
-        print("Menu\n-----\nBreakfast")
+        print("\nALL MENUS\n-----------")
+
+        print("\nPANCAKE HOUSE MENU\n-----------")
         self._print_menu(breakfast_it)
-        print("\nLunch")
+        print("\nDINER MENU\n-----------")
         self._print_menu(diner_it)
-        print("\nDinner")
+        print("\nCAFE MENU\n-----------")
         self._print_menu(cafe_it)
         
 
     def _print_menu(self, menu: Iterator):
         for item in menu:
-            print(item)
+            print(f"{item.name}: ${item.price}")
